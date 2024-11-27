@@ -9,5 +9,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+class FileUpload(models.Model):
+    title = models.CharField(max_length=100)
+    file = models.FileField(upload_to='files/')  # For general files
+    image = models.ImageField(upload_to='images/')  # For images (optional)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
 
 

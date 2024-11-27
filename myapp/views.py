@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from .models import Product
 from django.contrib.auth import authenticate,login,logout
+from django.shortcuts import render, redirect
+from .forms import FileUploadForm
 
 # View for greeting message
 def hello_world(request):
@@ -90,6 +92,22 @@ def login_user(request):
 def logout_user(request):
     logout(request)  
     return redirect('login_user')
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = FileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  
+            return redirect('success')  
+    else:
+        form = FileUploadForm()
+    return render(request, 'upload.html', {'form': form})
+
+
+def success(request):
+    return HttpResponse("File uploaded successfully!")
+
 
 
 

@@ -22,4 +22,6 @@ urlpatterns = [
     path('user/delete/<int:user_id>/', views.delete_user, name='delete_user'),  # Delete a product
     path('login', views.login_user, name="login_user"),
     path('logout', views.logout_user, name="logout_user"),
+    path('upload/', views.upload_file, name='upload_file'),
+    path('success/', views.success, name='success'),
 ]
