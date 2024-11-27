@@ -19,9 +19,10 @@ urlpatterns = [
     path('user/<int:user_id>/', views.get_user, name='get_user'),  # View details of a single product
     path('user/list/', views.get_all_users, name='get_all_users'),  # List all products
     path('user/edit/<int:user_id>/', views.edit_user, name='edit_user'),  # Edit a product
-    path('user/delete/<int:user_id>/', views.delete_user, name='delete_user'),  # Delete a product
-    path('login', views.login_user, name="login_user"),
-    path('logout', views.logout_user, name="logout_user"),
+    path("register/", views.register, name="register"),
+    path("login/", views.login, name="login"),
+    path("logout/",views.logout_user,name="logout_user"),
     path('upload/', views.upload_file, name='upload_file'),
     path('success/', views.success, name='success'),
+    path('delete/<int:user_id>/', views.delete_user, name='delete_user'),
 ]

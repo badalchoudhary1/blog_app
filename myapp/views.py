@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import json
+from myapp import models
 from users import users
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
-from .models import Product
-from django.contrib.auth import authenticate,login,logout
+from myapp.models import Product,WangUser
 from django.shortcuts import render, redirect
 from .forms import FileUploadForm
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth import logout
 
 # View for greeting message
 def hello_world(request):
@@ -53,9 +56,13 @@ def get_user(request, user_id):
     else:
         return HttpResponse("Product not found", status=404)
 
+# def get_all_users(request):
+#     products = Product.objects.all()  
+#     return render(request, 'get_all_user.html', {'users': products})  
+
 def get_all_users(request):
-    products = Product.objects.all()  # Fetch all products
-    return render(request, 'get_all_user.html', {'users': products})  # Pass as 'users'
+    users = Product.objects.all()  # Fetch all products
+    return render(request, 'get_all_user.html', {'users': users})
 
 def edit_user(request, user_id):
     product = get_object_or_404(Product, id=user_id)  # Fetch the product or 404
@@ -72,26 +79,26 @@ def edit_user(request, user_id):
 
     return render(request, 'edit_user.html', {'product': product})  # Render edit form
 
-def delete_user(request, user_id):
-    product = get_object_or_404(Product, id=user_id)  # Fetch the product or 404
+def delete_user(request, user_id):  # The correct parameter name should be user_id
+    product = get_object_or_404(Product, id=user_id)  # Fetch the product with user_id
     product.delete()  # Delete the product
-    return redirect('get_all_users')  # Redirect to the product list
+    return redirect('get_all_users') 
 
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST.get("name")
-        password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password)  
-        if user is not None:
-            login(request, user) 
-            return redirect('create_user')  
-        else:
-            return render(request, "login.html")
-    return render(request, "login.html")
+# def login_user(request):
+#     if request.method == "POST":
+#         username = request.POST.get("name")
+#         password = request.POST.get("password")
+#         user = authenticate(request, username=username, password=password)  
+#         if user is not None:
+#             login(request, user) 
+#             return redirect('create_user')  
+#         else:
+#             return render(request, "login.html")
+#     return render(request, "login.html")
 
 def logout_user(request):
     logout(request)  
-    return redirect('login_user')
+    return redirect('login')
 
 
 def upload_file(request):
@@ -107,6 +114,44 @@ def upload_file(request):
 
 def success(request):
     return HttpResponse("File uploaded successfully!")
+
+
+def register(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        error_name = None
+
+        # Check if username already exists
+        if WangUser.objects.filter(username=username).exists():
+            error_name = "This username already exists."
+            return render(request, "register.html", {"error_name": error_name})
+
+        # Create a new user
+        hashed_password = make_password(password)  # Hash the password
+        WangUser.objects.create(username=username, password=hashed_password, email=email)
+
+        return redirect("login")  # Redirect to login page
+    return render(request, "register.html")
+
+
+def login(request):
+    error = None
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        try:
+            user = WangUser.objects.get(username=username)
+            if check_password(password, user.password):  # Check the hashed password
+                return redirect("create_user")  # Replace with your target page
+            else:
+                error = "Incorrect password."
+        except WangUser.DoesNotExist:
+            error = "Username does not exist."
+
+    return render(request, "login.html", {"error": error})
 
 
 
