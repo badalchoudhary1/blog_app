@@ -1,0 +1,12 @@
+<h1>Edit Patient Disease</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="patient_name">Patient Name</label>
+    <input type="text" id="name" name="name" value="{{ patient_name }}" >
+    
+    <label for="patient_disease">Patient Disease</label>
+    <input type="text" id="disease" name="patient_disease" value="{{ patient_disease }}">
+    
+    <button type="submit">Update List</button>
+</form>
+<a href="{% url 'get_all_patient' %}">Back to Patient List</a>

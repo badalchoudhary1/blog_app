@@ -1,0 +1,23 @@
+<div>
+    <h1>All Categories</h1>
+    <button>
+        <a href="{% url 'create_category' %}">
+            Add Category
+        </a>
+    </button>
+
+
+    <ul>
+        {% for category in categories %}
+            <li>
+                <strong>Id:</strong> {{ category.id }}, <strong>Name:</strong> {{ category.name }}
+                <button>
+                    <a href="{% url 'delete_category' category.id %}">Delete category</a>
+                </button>
+                <button>
+                    <a href="{% url 'edit_category' category.id %}">edit category</a>
+                </button>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

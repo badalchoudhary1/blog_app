@@ -1,0 +1,10 @@
+<h1>Hospital</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="name">Patient Name: </label>
+    <input type="text" name="name" id="name" required>
+    <label for="disease">Disease : </label>
+    <input type="text" name="disease" id="disease" required>
+
+    <button type="submit" style="background-color: azure;">ADD Patient</button>
+</form>

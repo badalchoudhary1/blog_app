@@ -1,0 +1,8 @@
+<h1>Product Details</h1>
+<p><strong>ID:</strong> {{ product.id }}</p>
+<p><strong>Name:</strong> {{ product.name }}</p>
+<p><strong>Price:</strong> {{ product.price }}</p>
+<p><strong>Category:</strong> {{ product.category }}</p>
+<p><strong>Color:</strong> {{ product.color }}</p>
+<a href="{% url 'edit_user' product.id %}">Edit Product</a> |
+<a href="{% url 'get_all_users' %}">Back to List</a>

@@ -1,0 +1,13 @@
+<h1>Edit Category</h1>
+
+{%if message %}
+<h3>{{message}}</h3>
+{% endif %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="{{ name }}" required />
+    <button type="submit">Update Category</button>
+</form>
+<a href="{% url 'get_all_category' %}">Back to category</a>

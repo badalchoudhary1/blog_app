@@ -1,0 +1,32 @@
+<h1>Product List</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Color</th>
+        <th>Actions</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.price }}</td>
+        <td>{{ user.category }}</td>
+        <td>{{ user.color }}</td>
+        <td>
+            <a href="{% url 'get_user' user.id %}">
+                <button style="background-color: green;color: black;">View</button></a> |
+            <a href="{% url 'edit_user' user.id %}">
+                <button style="background-color: blanchedalmond; color: black;">Edit</button>
+            </a> |
+            <a href="{% url 'delete_user' user.id %}">
+                <button style="background-color: aquamarine; color: black;">Delete</button></a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'create_user' %}">
+    <button style="background-color: aliceblue; color: black;">Add Product</button>
+</a>
