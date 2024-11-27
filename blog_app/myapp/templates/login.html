@@ -1,0 +1,10 @@
+<h1>Login page</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <p>USER: <input type="text",name="name", required> </p>
+    <p>password : <input type="password",name="password" required> </p>
+    <button type="submit" ,value="sign in"><a href="{% url 'create_user' %}">Login</a></button>
+</form>
+
+
