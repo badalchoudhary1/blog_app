@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'shop',
     'hospital',
     'blog_detail',
+    'dbapp',
 ]
 
 MIDDLEWARE = [

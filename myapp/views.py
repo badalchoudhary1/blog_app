@@ -136,6 +136,7 @@ def register(request):
     return render(request, "register.html")
 
 
+
 def login(request):
     error = None
     if request.method == "POST":
@@ -152,6 +153,11 @@ def login(request):
             error = "Username does not exist."
 
     return render(request, "login.html", {"error": error})
+
+
+
+        
+
 
 
 
