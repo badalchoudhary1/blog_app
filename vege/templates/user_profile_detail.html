@@ -1,0 +1,19 @@
+<h2>{{ user_profile.user.username }}'s Profile</h2>
+<p>Email: {{ user_profile.user.email }}</p>
+<p>Bio: {{ user_profile.bio }}</p>
+<p><img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" width="150"></p>
+
+<h3>Posts</h3>
+<ul>
+    {% for post in posts %}
+    <li>
+        <strong>{{ post.title }}</strong><br>
+        {{ post.content }}<br>
+        <small>Created at: {{ post.created_at }}</small>
+    </li>
+    {% empty %}
+    <li>No posts available.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'create_post' %}" class="btn btn-primary">Create New Post</a>

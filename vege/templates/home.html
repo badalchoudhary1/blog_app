@@ -1,0 +1,29 @@
+
+{% extends 'vege_base.html' %}
+
+{% block content %}
+
+<h4>Login user : {{request.user}} </h1>
+<br>
+Is Login {{request.user.is_authenticated}}
+<br>
+<div class="py-3"></div>
+
+<button type="button"  class="btn btn-outline-primary">
+    <a href="/login">
+        login
+    </a>
+</button>
+
+<button type="button" class="btn btn-outline-secondary">
+    <a href="/register">
+        Register
+    </a>
+</button>
+
+<button type="button" class="btn btn-outline-secondary">
+    <a href="/logout">
+        logout
+    </a>
+</button>
+{% endblock %}

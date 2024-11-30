@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fgo#$$r$m&r72^w$@h*xlv6u^2_3wokfowk#2p8@orx5h*j*sp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'hospital',
     'blog_detail',
     'dbapp',
+    'vege'
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,13 @@ ROOT_URLCONF = 'blog_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'myapp/templates'), os.path.join(BASE_DIR, 'shop/templates'), os.path.join(BASE_DIR, 'blog_app/templates'),os.path.join(BASE_DIR,'hospital/templates')],  # Ensure the template directory is included
+        'DIRS': [
+            os.path.join(BASE_DIR, 'myapp/templates'), 
+            os.path.join(BASE_DIR, 'shop/templates'), 
+            os.path.join(BASE_DIR, 'blog_app/templates'),
+            os.path.join(BASE_DIR,'hospital/templates'),
+            os.path.join(BASE_DIR,'vege/templates')
+            ],  # Ensure the template directory is included
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Profile</title>
+</head>
+<body>
+    
+    <h1>Create User and Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <br>
+            Is Login {{request.user.is_authenticated}}
+            <br>
+        <h2>Create User</h2>
+        {{ user_form.as_p }}
+
+        <h2>Create Profile</h2>
+        {{ profile_form.as_p }}
+
+        <button type="submit">Save Profile</button>
+    </form>
+    <a href="{% url 'user_profiles' %}">View Profiles</a>
+    <button type="button" class="btn btn-outline-secondary">
+        <a href="/logout">
+            logout
+        </a>
+    </button>
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+{% extends 'vege_base.html' %}
+
+
+{% block content %}
+
+{{request.user.is_authenticated}}
+
+<form method="POST" action="/register/">
+  {% csrf_token %}
+  {% if messages %}
+  <ul class="messages px-0 mx-0">
+      {% for message in messages %}
+      <li{% if message.tags %}  role="alert" style="list-style: none;" class="alert alert-primary {{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+
+    <div class="mb-3 row">
+      <div class="col-6"> 
+        <label for="exampleInputEmail1" class="form-label">Fist Name</label>
+        <input type="text" name="first_name" class="form-control" id="first_name" aria-describedby="first_name">
+      </div>
+      <div class="col-6"> 
+        <label for="exampleInputEmail1" class="form-label">Last Name</label>
+        <input type="text" name="last_name" class="form-control" id="last_name" aria-describedby="last_name">
+      </div>
+      </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">User Name</label>
+      <input type="text" name="user_name" class="form-control" id="user_name" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+   
+    <a href="/login/">
+      login
+    </a>
+    <div class="py-2"></div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  {% endblock %}

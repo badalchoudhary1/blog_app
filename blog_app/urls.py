@@ -25,12 +25,13 @@ def redirect_to_shop(request):
 
 
 urlpatterns = [ 
+    path("", include("vege.urls")),
     path('admin/', admin.site.urls),
-    path('myapp/', include('myapp.urls')),
-    path('shop/',include('shop.urls')),
-    path('*', redirect_to_shop),
-    path('hospital/',include('hospital.urls')),
-    path('blogs/', include('blog_detail.urls')),
+    # path('myapp/', include('myapp.urls')),
+    # path('shop/',include('shop.urls')),
+    # path('*', redirect_to_shop),
+    # path('hospital/',include('hospital.urls')),
+    # path('blogs/', include('blog_detail.urls')),
 ]
 
 if settings.DEBUG:

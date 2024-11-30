@@ -100,7 +100,6 @@ def logout_user(request):
     logout(request)  
     return redirect('login')
 
-
 def upload_file(request):
     if request.method == 'POST':
         form = FileUploadForm(request.POST, request.FILES)
@@ -111,10 +110,8 @@ def upload_file(request):
         form = FileUploadForm()
     return render(request, 'upload.html', {'form': form})
 
-
 def success(request):
     return HttpResponse("File uploaded successfully!")
-
 
 def register(request):
     if request.method == "POST":
@@ -135,24 +132,8 @@ def register(request):
         return redirect("login")  # Redirect to login page
     return render(request, "register.html")
 
-
-
-def login(request):
-    error = None
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-
-        try:
-            user = WangUser.objects.get(username=username)
-            if check_password(password, user.password):  # Check the hashed password
-                return redirect("create_user")  # Replace with your target page
-            else:
-                error = "Incorrect password."
-        except WangUser.DoesNotExist:
-            error = "Username does not exist."
-
-    return render(request, "login.html", {"error": error})
+def login_user(request):
+    return render(request,'login.html')
 
 
 
