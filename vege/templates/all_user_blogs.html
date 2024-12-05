@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        img {
+            max-width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <h1>Posts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Written by</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Create time </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.user_profile.user.username }}</td> <!-- Show associated username -->
+                <td>{{ post.title }}</td> <!-- Show associated username -->
+                <td>{{ post.content }}</td>
+                <td>{{ post.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   
+</body>
+</html>

@@ -10,7 +10,6 @@ class UserProfile(models.Model):
         return self.user.username
     
 
-
 class Post(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='posts')  # ForeignKey to UserProfile
     title = models.CharField(max_length=255)  # Title of the post
